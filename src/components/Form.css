@@ -1,0 +1,9 @@
+.Form {
+  width: 70ch;
+  height: 100%;
+  text-align: center;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 19px #1e1a18;
+  border-radius: 9px;
+}
