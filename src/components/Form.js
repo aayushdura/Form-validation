@@ -5,7 +5,6 @@ import useForm from "../validateInfo/useForm";
 import validatefn from "../validateInfo/validate";
 const Form = () => {
   const { values, handleChange, handleSubmit, errors } = useForm(validatefn);
-  console.log(errors.username);
   return (
     <div>
       <h1>Please provide correct Information</h1>
