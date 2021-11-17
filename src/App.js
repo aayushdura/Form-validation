@@ -1,24 +1,60 @@
-import "./App.css";
-import Button from "@material-ui/core/Button";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import { Link } from "react-router-dom";
+import Form from "./components/Form";
+import Postregister from "./components/Postregister";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import { useState } from "react";
+import useForm from "./validateInfo/useForm";
+import validate from "./validateInfo/validate";
 
 const App = () => {
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+    confpassword: "",
+    email: "",
+    age: 0,
+    address: "",
+  });
+  const [errors, setErrors] = useState({
+    username: "",
+    password: "",
+    confpassword: "",
+    email: "",
+    age: "",
+    address: "",
+  });
+  const { handleChange, handleSubmit } = useForm({
+    setValues,
+    setErrors,
+    values,
+    errors,
+    validate,
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">Hey !!!</header>
-      <h2>Please Do Register</h2>
-      <Link to="/Form" style={{ textDecoration: "none" }}>
-        <Button
-          type="submit"
-          variant="contained"
-          size="large"
-          color="secondary"
-          endIcon={<AppRegistrationIcon />}
-        >
-          Go to Register page
-        </Button>
-      </Link>
+    <div>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route
+            exact
+            path="/Form"
+            element={
+              <Form
+                errors={errors}
+                values={values}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/Greet"
+            element={<Postregister values={values} />}
+          />
+        </Routes>
+      </Router>
     </div>
   );
 };

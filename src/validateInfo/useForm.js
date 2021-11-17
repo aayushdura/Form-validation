@@ -1,31 +1,23 @@
-import { useState } from "react";
-const useForm = (validatefn) => {
-  const [values, setValues] = useState({
-    username: "",
-    password: "",
-    confpassword: "",
-    email: "",
-    age: 0,
-    address: "",
-  });
-
-  const [errors, setErrors] = useState({
-    username: "",
-    password: "",
-    confpassword: "",
-    email: "",
-    age: 0,
-    address: "",
-  });
+// import { useNavigate } from "react-router";
+const useForm = ({ setValues, setErrors, values, errors, validate }) => {
+  // const navigate = useNavigate();
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setValues({ ...values, [id]: value });
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+    setErrors(
+      validate({
+        ...values,
+        [name]: value,
+      })
+    );
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(validatefn(values));
+    setErrors(validate(values));
   };
-
   return { values, handleChange, handleSubmit, errors };
 };
 
